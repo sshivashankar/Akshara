@@ -1,0 +1,3 @@
+'use client';
+import { useState } from 'react';
+export default function Login(){const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [token,setToken]=useState('');const submit=async()=>{const r=await fetch(process.env.NEXT_PUBLIC_API_URL+'/api/auth/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,password})});const j=await r.json();setToken(j.access_token||'failed');};return <main className='p-8'><input className='text-black' value={email} onChange={e=>setEmail(e.target.value)} /><input className='text-black' type='password' value={password} onChange={e=>setPassword(e.target.value)} /><button onClick={submit}>Login</button><pre>{token}</pre></main>}
