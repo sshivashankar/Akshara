@@ -1,0 +1,27 @@
+{
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "node -e \"console.log('no tests')\""
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.59.0",
+    "framer-motion": "^11.11.10",
+    "next": "15.0.0",
+    "react": "19.0.0-rc-69d4b800-20241021",
+    "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "recharts": "^2.12.7",
+    "socket.io-client": "^4.8.0",
+    "zustand": "^5.0.0-rc.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
+  }
+}

@@ -1,0 +1,3 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{background:#090b11;color:#e6e8ee}
+.card{backdrop-filter:blur(14px);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px}

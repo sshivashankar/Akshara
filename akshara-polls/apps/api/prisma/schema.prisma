@@ -1,0 +1,12 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+model User { id String @id @default(cuid()) email String @unique passwordHash String role String @default("ADMIN") events Event[] createdAt DateTime @default(now()) }
+model Event { id String @id @default(cuid()) title String joinCode String @unique ownerId String owner User @relation(fields:[ownerId], references:[id]) sessions Session[] createdAt DateTime @default(now()) @@index([ownerId]) }
+model Session { id String @id @default(cuid()) eventId String event Event @relation(fields:[eventId], references:[id]) title String scheduledAt DateTime polls Poll[] questions Question[] attendance Attendance[] snapshots AnalyticsSnapshot[] }
+model Poll { id String @id @default(cuid()) sessionId String session Session @relation(fields:[sessionId], references:[id]) type String question String options PollOption[] responses PollResponse[] isTimed Boolean @default(false) durationSeconds Int? }
+model PollOption { id String @id @default(cuid()) pollId String poll Poll @relation(fields:[pollId], references:[id]) label String }
+model PollResponse { id String @id @default(cuid()) pollId String poll Poll @relation(fields:[pollId], references:[id]) optionId String? attendeeId String createdAt DateTime @default(now()) @@index([pollId]) }
+model Question { id String @id @default(cuid()) sessionId String session Session @relation(fields:[sessionId], references:[id]) content String upvotes Int @default(0) pinned Boolean @default(false) moderated Boolean @default(false) }
+model Attendance { id String @id @default(cuid()) sessionId String session Session @relation(fields:[sessionId], references:[id]) attendeeId String department String joinedAt DateTime @default(now()) @@index([sessionId, department]) }
+model Feedback { id String @id @default(cuid()) sessionId String rating Int comment String? createdAt DateTime @default(now()) }
+model AnalyticsSnapshot { id String @id @default(cuid()) sessionId String session Session @relation(fields:[sessionId], references:[id]) participants Int responses Int engagementRate Float recordedAt DateTime @default(now()) }
